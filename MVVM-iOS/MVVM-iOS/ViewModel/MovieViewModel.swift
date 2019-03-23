@@ -6,7 +6,7 @@
 //  Copyright © 2019 Sagar More. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol ViewModelDelegate : class {
     func reloadTable()
@@ -42,13 +42,18 @@ class MovieViewModel {
 
 struct MovieObjectViewModel {
     let imagePath : String
-    let description : String
+    let description : NSMutableAttributedString
     
     ///Created dependency injection for view model
     init(_ model : MovieObject) {
+        
         //format full image path
         imagePath = Constants.domainImage + "w300" + model.poster_path
         //format description of movie as : movie title (vote average)
-        description = model.title + " (" + model.vote_average.description  + ")"
+        let attributedString = NSMutableAttributedString(string: model.title)
+        attributedString.addAttributes([NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12.0)], range: NSMakeRange(0, attributedString.length))
+        let attributedVote = NSAttributedString(string: " (" + model.vote_average.description  + ")", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12.0)])
+        attributedString.append(attributedVote)
+        description = attributedString
     }
 }
