@@ -9,8 +9,10 @@
 import Foundation
 
 struct MovieRepository {
-    private let endPoint = ""
-    func getMovies(_ page : Int, completionHandler : @escaping (Data?, Error?) -> Void) {
+    private let endPoint = "/movie/popular?"
+    
+    /// gets popular movies from server
+    func getMovies( completionHandler : @escaping (Data?, Error?) -> Void) {
         NetworkManager.shared.startRequest(endPoint, httpMethod: .get) { (data, err) in
             completionHandler(data, err)
         }

@@ -20,7 +20,7 @@ class MovieListCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell(_ data : MovieObject) {
-        lblMoveName.text =  data.title == "" ? data.name : data.title
+        lblMoveName.text =  data.title
         ImageService.getImagen(name: data.poster_path, size: 300) { (img) in
             self.imgMovie.image = img
         }

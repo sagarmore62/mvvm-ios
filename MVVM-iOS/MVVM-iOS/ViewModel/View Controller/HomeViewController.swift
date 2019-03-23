@@ -21,6 +21,7 @@ class HomeViewController: UIViewController {
         setupCollectionView()
         viewModel = MovieViewModel()
         viewModel.delegate = self
+        viewModel.getMovies()
     }
     
     private func setupCollectionView() {
@@ -32,7 +33,7 @@ class HomeViewController: UIViewController {
         flowLayout?.minimumInteritemSpacing = padding
         flowLayout?.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
         let cellWidth = (view.bounds.size.width - (padding * 3)) / 2 //( device width - padding between cell ) / 2
-        let cellHeight = cellWidth + 25.0 // cell width + movie lable height
+        let cellHeight = (cellWidth * 1.5) + 40.0 // cell width * 1.5 + movie lable height
         flowLayout?.itemSize = CGSize(width: cellWidth , height: cellHeight)
     }
 
@@ -40,9 +41,9 @@ class HomeViewController: UIViewController {
 
 // MARK: - view model delegate methods
 extension HomeViewController : ViewModelDelegate {
-    func reloadTable(type: Int) {
-        DispatchQueue.main.sync {
-            self.collectionView.reloadItems(at:  [IndexPath(row: type, section: 0)])
+    func reloadTable() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
         }
     }
 }

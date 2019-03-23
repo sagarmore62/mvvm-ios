@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 enum HttpMethod : String {
     case post = "POST"
@@ -25,10 +26,12 @@ class NetworkManager  {
             completionHandler(nil, nil)
             return
         }
+        
         var request = URLRequest(url: URL)
         request.httpMethod = httpMethod.rawValue
-        URLSession.shared.dataTask(with: request) { (data, _, error) in
-            completionHandler(data, error)
-        }.resume()
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        Alamofire.request(request).validate().response { (response) in
+          completionHandler(response.data, response.error)
+        }
     }
 }

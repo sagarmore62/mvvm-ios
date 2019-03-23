@@ -10,10 +10,6 @@ import Foundation
 
 struct MovieList : Decodable {
     
-    // total number of pages in list
-    let total_pages    : Int
-    // total number of result in request
-    let total_results  : Int
     // list of movies in result
     var results        : [MovieObject]
     

@@ -9,11 +9,15 @@
 import Foundation
 
 protocol ViewModelDelegate : class {
-    func reloadTable(type: Int)
+    func reloadTable()
 }
 
 class MovieViewModel {
-    var list = [MovieObject]()
+    var list = [MovieObject]() {
+        didSet {
+            delegate?.reloadTable()
+        }
+    }
     private let repo : MovieRepository?
     weak var delegate: ViewModelDelegate?
     
@@ -22,11 +26,11 @@ class MovieViewModel {
     }
     
     func getMovies() {
-        repo?.getMovies(0, completionHandler: { (data, err) in
+        repo?.getMovies( completionHandler: { (data, err) in
             if let newData = data {
                 newData.getJsonModel(modelType: MovieList.self, decodingStrategy:JSONDecoder.KeyDecodingStrategy.useDefaultKeys , completionHandler: { (model, error) in
-                    if let model = model {
-                        self.list.append(contentsOf: model.results)
+                    if let unwrapped = model {
+                        self.list.append(contentsOf: unwrapped.results)
                     }
                 })
             }

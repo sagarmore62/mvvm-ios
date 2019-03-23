@@ -15,6 +15,4 @@ struct MovieObject : Decodable{
     let title           : String
     /// Image for poster portrait
     let poster_path     : String
-    /// Name of tv show
-    let name            : String
 }
