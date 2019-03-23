@@ -18,10 +18,9 @@ class ImageService: NSObject {
     
     class func getImagen(name: String, size : Int, completion: @escaping(UIImage) -> Void) {
         guard let localImage = UIImage(contentsOfFile: self.path(name: name)) else {
-            let url = Constants.domainImage + "w" + String(size) + String(name)
             let qos = DispatchQoS(qosClass: .userInitiated, relativePriority: 0)
             DispatchQueue.global(qos: qos.qosClass).async(execute: {
-                let imagenData = NSData(contentsOf: NSURL(string: url)! as URL)
+                let imagenData = NSData(contentsOf: NSURL(string: name)! as URL)
                 DispatchQueue.main.async( execute: {
                     imagenData?.write(toFile: self.path(name: name), atomically: true)
                     if let imgData = imagenData{

@@ -19,9 +19,9 @@ class MovieListCollectionViewCell: UICollectionViewCell {
         imgMovie.layer.cornerRadius = 5.0
     }
     
-    func configureCell(_ data : MovieObject) {
-        lblMoveName.text =  data.title
-        ImageService.getImagen(name: data.poster_path, size: 300) { (img) in
+    func configureCell(_ data : MovieObjectViewModel) {
+        lblMoveName.text =  data.description
+        ImageService.getImagen(name: data.imagePath, size: 300) { (img) in
             self.imgMovie.image = img
         }
         

@@ -13,7 +13,7 @@ protocol ViewModelDelegate : class {
 }
 
 class MovieViewModel {
-    var list = [MovieObject]() {
+    var list = [MovieObjectViewModel]() {
         didSet {
             delegate?.reloadTable()
         }
@@ -30,10 +30,25 @@ class MovieViewModel {
             if let newData = data {
                 newData.getJsonModel(modelType: MovieList.self, decodingStrategy:JSONDecoder.KeyDecodingStrategy.useDefaultKeys , completionHandler: { (model, error) in
                     if let unwrapped = model {
-                        self.list.append(contentsOf: unwrapped.results)
+                        //create movie object view models from movie model
+                        let arr = unwrapped.results.map({ MovieObjectViewModel($0)})
+                        self.list.append(contentsOf:arr)
                     }
                 })
             }
         })
+    }
+}
+
+struct MovieObjectViewModel {
+    let imagePath : String
+    let description : String
+    
+    ///Created dependency injection for view model
+    init(_ model : MovieObject) {
+        //format full image path
+        imagePath = Constants.domainImage + "w300" + model.poster_path
+        //format description of movie as : movie title (vote average)
+        description = model.title + " (" + model.vote_average.description  + ")"
     }
 }

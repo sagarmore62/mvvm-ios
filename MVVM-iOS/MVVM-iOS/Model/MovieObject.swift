@@ -9,10 +9,10 @@
 import Foundation
 
 struct MovieObject : Decodable{
-    // id of movie from db
-    let id              : Int
     // title of movie
     let title           : String
-    /// Image for poster portrait
+    // Image for poster portrait
     let poster_path     : String
+    // Average rating
+    let vote_average    : Float
 }

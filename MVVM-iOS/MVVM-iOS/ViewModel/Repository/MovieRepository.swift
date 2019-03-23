@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Repository to feed data for movie model
 struct MovieRepository {
     private let endPoint = "/movie/popular?"
     
