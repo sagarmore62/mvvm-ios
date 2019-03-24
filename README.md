@@ -1,6 +1,7 @@
 # mvvm-ios
 This demo app exhibits, how MVC app can easily get migrate to MVVM.
 
+![Snippet Use](https://github.com/sagarmore62/mvvm-ios/blob/master/MVVM-iOS/MVVM-iOS/ScreenShot.png)
 
 ## Note :
 This app is compliled with Xcode 10.1 with Swift Language 4.2
