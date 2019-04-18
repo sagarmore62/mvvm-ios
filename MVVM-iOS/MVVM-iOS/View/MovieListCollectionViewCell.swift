@@ -21,10 +21,9 @@ class MovieListCollectionViewCell: UICollectionViewCell {
     
     func configureCell(_ data : MovieObjectViewModel) {
         lblMoveName.attributedText =  data.description
-        ImageService.getImagen(name: data.imagePath, size: 300) { (img) in
+        ImageService.getImage(name: data.imagePath, size: 300) { (img) in
             self.imgMovie.image = img
         }
-        
     }
     
 }

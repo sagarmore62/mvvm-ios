@@ -9,8 +9,8 @@
 import Foundation
 
 struct MovieList : Decodable {
-    
     // list of movies in result
     var results        : [MovieObject]
-    
 }
+
+

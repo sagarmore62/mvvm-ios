@@ -16,7 +16,7 @@ class ImageService: NSObject {
         return finalPath + name
     }
     
-    class func getImagen(name: String, size : Int, completion: @escaping(UIImage) -> Void) {
+    class func getImage(name: String, size : Int, completion: @escaping(UIImage) -> Void) {
         guard let localImage = UIImage(contentsOfFile: self.path(name: name)) else {
             let qos = DispatchQoS(qosClass: .userInitiated, relativePriority: 0)
             DispatchQueue.global(qos: qos.qosClass).async(execute: {

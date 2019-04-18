@@ -21,7 +21,7 @@ class NetworkManager  {
     }
     
     func startRequest(_ url : String, httpMethod : HttpMethod, completionHandler : @escaping (Data?, Error?) -> Void) {
-        let finalUrl = Constants.baseUrl + url + Constants.keyPath + Constants.apiKey
+        let finalUrl = getCompleteUrl(url)
         guard let URL = URL(string: finalUrl) else {
             completionHandler(nil, nil)
             return
@@ -33,5 +33,9 @@ class NetworkManager  {
         Alamofire.request(request).validate().response { (response) in
           completionHandler(response.data, response.error)
         }
+    }
+    
+    private func getCompleteUrl(_ url : String) -> String {
+        return Constants.baseUrl + url + Constants.keyPath + Constants.apiKey
     }
 }
